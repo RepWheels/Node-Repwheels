@@ -86,3 +86,8 @@ exports.deleteProduct =  async (req,res) => {
         });
     }
 }
+
+
+exports.getHome =  (req,res) => {
+    res.render("index")
+}
