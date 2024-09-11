@@ -4,7 +4,7 @@ const productsModels = require('../models/productosModels')
 exports.allProducts = async (req,res) => {
     const listadoProductos = await productsModels.find({});
     if(listadoProductos){
-        res.render('pages/listProduct',{
+        res.render('pages/listaProductos',{
             listadoProductos:listadoProductos
         });
     }else{
@@ -14,17 +14,8 @@ exports.allProducts = async (req,res) => {
     }
 }
 
-exports.catalogo = async (req,res) => {
-    const listadoProductos = await productsModels.find({});
-    if(listadoProductos){
-        res.render('pages/index',{
-            listadoProductos:listadoProductos
-        });
-    }else{
-        res.render('pages/listProduct',{
-            mensaje:"No hay datos disponibles"
-        });
-    }
+exports.index = async (req,res) => {
+    res.render('pages/index')
 }
 
 
@@ -36,18 +27,17 @@ exports.oneProduct =  async (req,res) => {
 
 exports.insertProduct =  async(req,res)=>{
     const newProduct = {
-        referencia:req.body.referencia,
         nombre:req.body.nombre,
-        descripcion:req.body.descripcion,
         precio:req.body.precio,
-        stock:req.body.stock,
+        descripcion_producto:req.body.descripcion_producto,
+        cantidad:req.body.cantidad,
         imagen:req.body.imagen,
         habilitado: true
     };
 
     let insert = await productsModels.create(newProduct)
     if(insert){
-        res.redirect('/products')
+        res.redirect('/productos');
     }else{
         res.status(404).json({'error':'wrong!!'}) 
     }
@@ -76,10 +66,11 @@ exports.insertProduct =  async(req,res)=>{
 
 
 exports.deleteProduct =  async (req,res) => {
-    const remove = await productsModels.findOneAndDelete({referencia:req.params.id});
+    const remove = await productsModels.findOneAndDelete({_id:req.params.id});
     const listadoProductos = await productsModels.find({});
     if(listadoProductos){
-        res.redirect('/products');
+        res.redirect('/productos');
+        
     }else{
         res.render('pages/listProduct',{
             mensaje:"No hay datos disponibles"

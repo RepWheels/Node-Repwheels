@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="trasnnav" >
+            <div class="container" >
+                <a class="navbar-brand" href="/inicio"><img src="../static/img/Logo.png" alt=""
+                        width="51px" height="50px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/productos" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Productos</a>
+                            
+                        </li>
+
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Clientes</a>
+                            <ul class="dropdown-menu" style="color: black;">
+                                <li><a class="dropdown-item" href="{% url 'registrarCliente' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarCliente' %}">Listar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Empleados</a>
+                            <ul class="dropdown-menu" style="color: black;">
+                                <li><a class="dropdown-item" href="{% url 'nuevoempleados' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'empleado' %}">Listar</a></li>
+                            </ul>
+                        </li>
+                        <!--
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Proveedores</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'registrarProveedores' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarProveedores' %}">Listar</a></li>
+                            </ul>
+                        </li>
+                    -->
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Calificaciones</a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a class="dropdown-item" href="{% url 'registrarCalificacion' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'calificacionListar' %}">Listar</a></li>
+                                
+                                <li><a class="dropdown-item" href="{% url 'calificaciones' %}">Calificaciones</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Citas</a>
+                            <ul class="dropdown-menu">
+                               
+                                <li><a class="dropdown-item" href="{% url 'registrarCitar' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarCita' %}">Listar</a></li>
+                                
+                                <li><a class="dropdown-item" href="{% url 'citaEmpleado' %}">Listar</a></li>
+                               
+                                <li><a class="dropdown-item" href="{% url 'citas' %}">Citas</a></li>
+                            </ul>
+                        </li>
+                       
+                            <li class="nav-item dropdown" >
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" style="color: black;">Categoria</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'registrarCategoria' %}">Registrar</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'listarCategoria' %}">Listar</a></li>
+                                </ul>
+                            </li>
+                      
+                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Servicios</a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a class="dropdown-item" href="{% url 'registrarServicio' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarServicio' %}">Listar</a></li>
+                               
+                                <li><a class="dropdown-item" href="{% url 'servicios' %}">Servicios</a></li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                    <form id='botones' class="d-flex">
+                        
+                          
+                        
+                            <a class="btn btn-outline-danger text-black rounded-4" href="{% url 'login' %}">Iniciar Sesion</a>
+                            <a class="btn btn-outline-danger text-black rounded-4" href="{% url 'register' %}">Registrarse</a>
+                      
+                        
+                        
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="banner">
+        <h1><ins>RepWheels</ins></h1>
+        <div id="opciones">
+            <div class="opc">
+                <h3>Adquiere tu cita</h3>
+                <button class="btn btn-outline-danger btn-lg "><a href="{% url 'citas' %}">Agendar cita</a></button>
+            </div><br>
+            <div class="opc">
+                <h3>¿Te encuentras varado?</h3>
+                <button class="btn btn-outline-danger btn-lg" data-bs-toggle="modal"
+                    data-bs-target="#emergence">Emergencia</button>
+            </div>
+        </div>
+    </div>
+    </header>
+    <main>
+        <section id="section1">
+            <div class="tit">
+                <h1>Servicios</h1>
+            </div>
+            <article class="tarjetas">
+                    {% for i in servicios %}
+                        
+                            <div class="card align-items-center text-center p-10" style="width: 20rem; padding: 10px;">
+                                <div class="col-md-4">
+                                    <img src="{{ i.foto.url }}" class="img-fluid rounded-start" alt="{{ i.nombre }}" style="width:86%; height: 200px;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ i.nombre }}</h5>
+                                        <p class="card-text">{{ i.descripcion_servicio }}</p>
+                                        <p class="card-text">$ {{ i.precio }}</p>
+                                    </div>  
+                                </div>
+                            </div>
+                            
+                    
+                    {% endfor %}
+                
+            </article>
+            <div class="text-center mb-4">
+                <a href="{% url 'servicios' %}" class="btn btn-danger" >Ver más servicios</a>
+            </div>
+            
+        </section>
+        <section id="section2">
+            <div class="tit">
+                <h1>Procesos automotrices</h1>
+            </div>
+            <div id="carrusel">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                    <div class="carousel-inner">
+                        {% for i in servicios %}
+                      
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                          <div class="d-flex align-items-center">
+                            <img src="{{ i.foto.url }}" class="d-block mx-auto" width="80%" height="400px"
+                              alt="imagen descuentos">
+    
+                          </div>
+                        </div>
+                    {% endfor %} 
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="section3">
+            <div class="tit">
+                <h1>¿Por que elegirnos?</h1>
+            </div>
+            <div id="carta2">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'tienda/img/marcas.png' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Conocimiento</h5>
+                        <p class="card-text">Contamos con trabajores especializados y con un alto conocimiento en todas las
+                            marcas</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'tienda/img/tecnologia.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Tecnologia</h5>
+                        <p class="card-text">Contamos con equipos como escanner , multimetros , banco de inyectores, entre
+                            otras </p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'tienda/img/valor.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Honestidad</h5>
+                        <p class="card-text">Nuestros empleados son muy honestos al momento de realizar una cotizacion y
+                            realizar un trabajo </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section3">
+            <div class="tit">
+                <h1>Calificaciones de nuestro servicios</h1>
+            </div>
+            <article class="tarjetas">
+                {% if data %}
+                {% for e in data %}
+                    {% if forloop.counter > 0 and forloop.counter <= 3 %}
+                        <div class="card align-items-center text-center p-10" style="width:20%; padding: 2%;">
+                            <img src="{{ e.foto.url }}" class="card-img-top" style="width:85%;">
+                            <div class="card-body">
+                            <strong>Calificaciones: </strong>
+                            <form id="form_calificaciones">
+            
+                                <p class="clasificacion">
+                                <input type="radio" name="estrellas" class="star" value="5" {% if e.cantidad_estrellas == 5 %}checked="true"{% endif%}>
+                                <label for="radio1">★</label>
+                                <input type="radio" name="estrellas" class="star" value="4" {% if e.cantidad_estrellas == 4 %}checked="true"{% endif%}>
+                                <label for="radio2">★</label>
+                                <input type="radio" name="estrellas" class="star" value="3" {% if e.cantidad_estrellas == 3 %}checked="true"{% endif%}>
+                                <label for="radio3">★</label>
+                                <input type="radio" name="estrellas" class="star" value="2" {% if e.cantidad_estrellas == 2 %}checked="true"{% endif%}>
+                                <label class="st">★</label>
+                                <input type="radio" name="estrellas" class="star" value="1" {% if e.cantidad_estrellas == 1 %}checked="true"{% endif%}>
+                                <label for="radio5">★</label>
+                                </p>
+                            </form>
+                            <p class="card-text">{{ e.nombre }} </p>
+                            <p class="text"><strong>Hecho por: </strong> {{ e.cliente }}</p>
+                            <p class="text"><strong>Servicio: </strong>{{ e.servicios }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %} 
+                {% else %}
+                        <h2>No hay calificaciones</h2>
+                {% endif %}             
+            </article><br>
+            <div class="text-center mb-4">
+                <a href="{% url 'calificaciones' %}" class="btn btn-danger" >Ver más</a>
+            </div>
+        </section>
+        {% endblock %}
+    <footer>
+        <div id="super">
+            <div>
+                <h1 class="h1" id="company"></h1>
+            </div>
+            <div>
+                <h3>Contactenos</h3>
+                <p id="cel"></p>
+                <p id="cor"></p>
+                <p id="ubi"></p>
+                
+            </div>
+            <div>
+                <h3>Servicios</h3>
+                <ul>
+                    <li>Mecanica</li>
+                    <li>Pintura</li>
+                    <li>Latoneria</li>
+                    <li>Electricidad</li>
+                </ul>
+            </div>
+            <div>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="text" placeholder="Buscar">
+                    <button class="btn btn-outline-danger me-2" type="button">Buscar</button>
+                </form>
+            </div>
+        </div>
+        <div id="infer" class="fixed-bottom">
+            <h3>Redes Sociales</h3>
+            <a href="#"><i class="bi bi-twitter"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-whatsapp"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+

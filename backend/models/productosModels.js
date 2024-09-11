@@ -20,7 +20,14 @@ const productosSchema = new conexion.Schema({
     cantidad: {
         type: Number, // Corregido a Number para representar cantidad
         default: 0, // Valor por defecto si no se especifica
-    }
+    },
+    imagen: {
+        type: String,
+        required: [true, 'no existe la imagen o ruta a la imagen por defecto']
+    },
+    habilitado: {
+        type: Boolean, default: true
+    },
 }, { versionKey: false });
 
 const Productos = conexion.model('productos', productosSchema);
