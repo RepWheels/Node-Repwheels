@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="trasnnav" >
+            <div class="container" >
+                <a class="navbar-brand" href="/inicio"><img src="../static/img/Logo.png" alt=""
+                        width="51px" height="50px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/catalogo" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Productos</a>
+                            
+                        </li>
+
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Clientes</a>
+                            <ul class="dropdown-menu" style="color: black;">
+                                <li><a class="dropdown-item" href="{% url 'registrarCliente' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarCliente' %}">Listar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Empleados</a>
+                            <ul class="dropdown-menu" style="color: black;">
+                                <li><a class="dropdown-item" href="{% url 'nuevoempleados' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'empleado' %}">Listar</a></li>
+                            </ul>
+                        </li>
+                        <!--
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Proveedores</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'registrarProveedores' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarProveedores' %}">Listar</a></li>
+                            </ul>
+                        </li>
+                    -->
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Calificaciones</a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a class="dropdown-item" href="{% url 'registrarCalificacion' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'calificacionListar' %}">Listar</a></li>
+                                
+                                <li><a class="dropdown-item" href="{% url 'calificaciones' %}">Calificaciones</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Citas</a>
+                            <ul class="dropdown-menu">
+                               
+                                <li><a class="dropdown-item" href="{% url 'registrarCitar' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarCita' %}">Listar</a></li>
+                                
+                                <li><a class="dropdown-item" href="{% url 'citaEmpleado' %}">Listar</a></li>
+                               
+                                <li><a class="dropdown-item" href="{% url 'citas' %}">Citas</a></li>
+                            </ul>
+                        </li>
+                       
+                            <li class="nav-item dropdown" >
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" style="color: black;">Categoria</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'registrarCategoria' %}">Registrar</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'listarCategoria' %}">Listar</a></li>
+                                </ul>
+                            </li>
+                      
+                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Servicios</a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a class="dropdown-item" href="{% url 'registrarServicio' %}">Registrar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listarServicio' %}">Listar</a></li>
+                               
+                                <li><a class="dropdown-item" href="{% url 'servicios' %}">Servicios</a></li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                    <form id='botones' class="d-flex">
+                        
+                          
+                        
+                            <a class="btn btn-outline-danger text-black rounded-4" href="{% url 'login' %}">Iniciar Sesion</a>
+                            <a class="btn btn-outline-danger text-black rounded-4" href="{% url 'register' %}">Registrarse</a>
+                      
+                        
+                        
+                    </form>
+                </div>
+            </div>
+        </nav>
+    <main>
+        <section style="background-color: black;">
+            <div id="carouselServicios" class="carousel slide" style="max-width: 100%;">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="d-flex align-items-center">
+                    <img src="{% static 'tienda/img/descuentoproducto.jpg' %}" class="d-block mx-auto" width="80%" height="400px"
+                      alt="imagen descuentos">
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="d-flex align-items-center">
+                    <img src="{% static 'tienda/img/descuentomanodeobra.jpg' %}" class="d-block mx-auto" width="80%" height="400px" alt="imagen combos">
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselServicios" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterios</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselServicios" data-bs-slide="next">
+                <span class="carousel-control-next-icon" ariahidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+              </button>
+            </div>
+          </section>
+          <section class="servicios">
+            <h1>Productos</h1>
+            <div>
+              
+              <div class="product">
+                  
+                <% listadoProductos.forEach(producto => { %>
+                          
+                              <div class="card align-items-center text-center p-10" style="width: 18rem; padding: 4%;">
+                                <img src="<%= producto.imagen %>" class="card-img-top" alt="{{ p.nombre }}" style="width:86%; height: 130px;" >
+                                  <div class="card-body">
+                                    <p class="card-text"><%= producto.nombre %> <br> <strong>$<%= producto.precio %></strong> <br> <%= producto.descripcion_producto %></p>
+                                    <form>
+                                    
+                                      <input type="hidden" name="id" id="id_{{ p.id }}" value="{{ p.id }}" />
+                                      <input type="number" name="cantidad" id="cantidad_{{ p.id }}" min="1" max="{{ p.cantidad }}" value="1" style="width: 50px;" /><br><br>
+                                      <p class="card-text">Unidades disponibles: <strong><%= producto.cantidad %></strong></p>
+                                      <button type="button" class="btn btn-danger">Añadir al carrito</button>
+                                  </form>
+                                  </div>
+                              </div>
+                            
+                <%})%>
+              </div>
+             
+          </div>
+          </section>
+        </section>
+      </main>
+</body>
+</html>

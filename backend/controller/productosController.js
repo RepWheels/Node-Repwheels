@@ -18,6 +18,19 @@ exports.index = async (req,res) => {
     res.render('pages/index')
 }
 
+exports.catalogo = async (req,res) => {
+    const listadoProductos = await productsModels.find({});
+    if(listadoProductos){
+        res.render('pages/catalogo',{
+            listadoProductos:listadoProductos
+        });
+    }else{
+        res.render('pages/listProduct',{
+            mensaje:"No hay datos disponibles"
+        });
+    }
+}
+
 
 
 exports.oneProduct =  async (req,res) => {

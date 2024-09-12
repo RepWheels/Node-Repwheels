@@ -15,74 +15,15 @@
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/productos" role="button"
+                            <a class="nav-link dropdown-toggle" href="/catalogo" role="button"
                                 data-bs-toggle="dropdown" style="color: black;">Productos</a>
                             
                         </li>
-
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/usuarios" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Usuarios</a>
+                        </li>
                         
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" style="color: black;">Clientes</a>
-                            <ul class="dropdown-menu" style="color: black;">
-                                <li><a class="dropdown-item" href="{% url 'registrarCliente' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listarCliente' %}">Listar</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" style="color: black;">Empleados</a>
-                            <ul class="dropdown-menu" style="color: black;">
-                                <li><a class="dropdown-item" href="{% url 'nuevoempleados' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'empleado' %}">Listar</a></li>
-                            </ul>
-                        </li>
-                        <!--
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" style="color: black;">Proveedores</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'registrarProveedores' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listarProveedores' %}">Listar</a></li>
-                            </ul>
-                        </li>
-                    -->
-                        
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" style="color: black;">Calificaciones</a>
-                            <ul class="dropdown-menu">
-                                
-                                <li><a class="dropdown-item" href="{% url 'registrarCalificacion' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'calificacionListar' %}">Listar</a></li>
-                                
-                                <li><a class="dropdown-item" href="{% url 'calificaciones' %}">Calificaciones</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" style="color: black;">Citas</a>
-                            <ul class="dropdown-menu">
-                               
-                                <li><a class="dropdown-item" href="{% url 'registrarCitar' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listarCita' %}">Listar</a></li>
-                                
-                                <li><a class="dropdown-item" href="{% url 'citaEmpleado' %}">Listar</a></li>
-                               
-                                <li><a class="dropdown-item" href="{% url 'citas' %}">Citas</a></li>
-                            </ul>
-                        </li>
-                       
-                            <li class="nav-item dropdown" >
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" style="color: black;">Categoria</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url 'registrarCategoria' %}">Registrar</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'listarCategoria' %}">Listar</a></li>
-                                </ul>
-                            </li>
-                      
-                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" style="color: black;">Servicios</a>
@@ -98,13 +39,9 @@
                     </ul>
                     <form id='botones' class="d-flex">
                         
-                          
-                        
                             <a class="btn btn-outline-danger text-black rounded-4" href="{% url 'login' %}">Iniciar Sesion</a>
                             <a class="btn btn-outline-danger text-black rounded-4" href="{% url 'register' %}">Registrarse</a>
-                      
-                        
-                        
+
                     </form>
                 </div>
             </div>
