@@ -1,168 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <%- include('../partials/head'); %>
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Logo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Catalogo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Ver productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Ver usuarios</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                <div class="nav-botones">
-                    <button class="btn btn-primary" type="button">Iniciar sesion</button>
-                    <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-fill"></i></button>
-                </div>
-                
-            </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <div class="container-fluid m-3" style="padding: 2%;">
-            <h1 class="text-center">Productos</h1>
-                <table  class="table table-bordered table-hover" id="producto">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Precio</th>
-                            <th>Descripcion</th>
-                            <th>Cantidad</th>
-                            <th>Imagen</th>
-                            
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% listadoProductos.forEach(producto => { %>
-                            <tr>
-                                
-                                <td><%= producto.nombre %></td>
-                                <td><%= producto.precio %></td>
-                                <td><%= producto.descripcion_producto %></td>
-                                <td><%= producto.cantidad %></td>
-                                <td><%= producto.imagen %></td>
 
-                                <td>
-                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#show_<%= producto._id %>"><i class="bi bi-eye"></i></button>
-                                    <a class="btn btn-info" href="#"><i class="bi bi-pencil-square"></i></a>
-                                    <a class="btn btn-danger" onclick="deleteOne(`<%= producto._id %>`)"><i class="bi bi-trash-fill"></i></a>
-                                </td>
-                            </tr>
-                        <%})%>
-                    </tbody>
-                </table>
-                <div style="display: flex; justify-content: center; align-content: center;">
-                    <a  class="btn btn-success btn-lg" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#agg"><i class="bi bi-plus"></i></a>
-                </div>
-                
+<head>
+  <%- include('../partials/head'); %>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Catalogo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Ver productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Ver usuarios</a>
+            </li>
+
+          </ul>
         </div>
-    </main>
-    
-    
-    <%- include('../partials/footer'); %>
+
+        <div class="nav-botones">
+          <button class="btn btn-primary" type="button">Iniciar sesion</button>
+          <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"><i class="bi bi-cart-fill"></i></button>
+        </div>
+
+      </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container-fluid m-3" style="padding: 2%;">
+      <h1 class="text-center">Productos</h1>
+      <table class="table table-bordered table-hover" id="producto">
+        <thead class="table-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripcion</th>
+            <th>Cantidad</th>
+            <th>Imagen</th>
+
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% listadoProductos.forEach(producto=> { %>
+            <tr>
+
+              <td>
+                <%= producto.nombre %>
+              </td>
+              <td>
+                <%= producto.precio %>
+                <%= producto._id %>
+              </td>
+              <td>
+                <%= producto.descripcion_producto %>
+              </td>
+              <td>
+                <%= producto.cantidad %>
+              </td>
+              <td>
+                <img src="<%= producto.imagen %>" >
+              </td>
+
+              <td>
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#show_<%= producto._id %>"><i
+                    class="bi bi-eye"></i></button>
+                <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editarProducto_<%= producto._id %>"><i
+                    class="bi bi-pencil-square"></i></a>
+                <a class="btn btn-danger" onclick="deleteOne(`<%= producto._id %>`)"><i
+                    class="bi bi-trash-fill"></i></a>
+              </td>
+            </tr>
+            <%})%>
+        </tbody>
+      </table>
+      <div style="display: flex; justify-content: center; align-content: center;">
+        <a class="btn btn-success btn-lg" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#agg"><i
+            class="bi bi-plus"></i></a>
+      </div>
+
+    </div>
+  </main>
+
+
+  <%- include('../partials/footer'); %>
 </body>
 <script>
-    new DataTable('#producto');
+  new DataTable('#producto');
 </script>
+
+<!-- modal agregar producto -->
 <div class="modal" id="agg">
-    <div class="modal-dialog">
-      <div class="modal-content">
-  
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Agregar producto</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-  
-        <!-- Modal body -->
-        <div class="modal-body">
-            <form action="/insertarProducto" method="post" class="form">
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="">Nombre</label><br>
-                <input type="text" name="nombre" id="nombre" class="form-control"><br>
-              </div>
-              <div class="form-group col-md-12">
-                <label for="">Descripcion</label><br>
-                <input type="text" name="descripcion_producto" id="descripcion_producto" class="form-control"><br>
-              </div>
-              <div class="form-group col-md-12">
-                <label for="">Precio</label><br>
-                <input type="number" name="precio" id="precio" class="form-control"><br>
-              </div>
-              <div class="form-group col-md-12">
-                <label for="">Cantidad</label><br>
-                <input type="number" name="cantidad" id="cantidad" class="form-control"><br>
-              </div>
-              <div class="form-group col-md-12">
-                <label for="">Imagen</label><br>
-                <input type="text" name="imagen" id="imagen" class="form-control"><br>
-              </div><br>  
-            </div>  
-            <button class="btn btn-danger">Agregar producto</button>
-        </form>
-            
-          
-        </div>
-  
-        <!-- Modal footer -->
-        <div class="modal-footer">
-  
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-  
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Agregar producto</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form action="/insertarProducto" method="post" class="form">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="">Nombre</label><br>
+              <input type="text" name="nombre" id="nombre" class="form-control"><br>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="">Descripcion</label><br>
+              <input type="text" name="descripcion_producto" id="descripcion_producto" class="form-control"><br>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="">Precio</label><br>
+              <input type="number" name="precio" id="precio" class="form-control"><br>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="">Cantidad</label><br>
+              <input type="number" name="cantidad" id="cantidad" class="form-control"><br>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="">Imagen</label><br>
+              <input type="text" name="imagen" id="imagen" class="form-control"><br>
+            </div><br>
+          </div>
+          <button class="btn btn-success">Agregar producto</button>
+        </form>
+
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
     </div>
   </div>
+</div>
 
-<% listadoProductos.forEach(producto => { %>
+
+<!-- modal vista ver detalle producto -->
+<% listadoProductos.forEach(producto=> { %>
   <div class="modal" id="show_<%= producto._id %>">
     <div class="modal-dialog">
       <div class="modal-content">
-  
+
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title"><%= producto.nombre %></h4>
+          <h4 class="modal-title">
+            <%= producto.nombre %>
+          </h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-  
+
         <!-- Modal body -->
         <div class="modal-body">
-            <div style="display: flex; flex-direction: column; justify-content: space-around;">
-                <img src="<%= producto.imagen %>" alt="">
-                <p class="text-center">Nombre: <%= producto.nombre %> <br> Descripcion: <%= producto.descripcion_producto %><br>Precio: <%= producto.precio %><br> Cantidad: <%= producto.cantidad %></p>
-            </div>
-            
-          
+          <div style="display: flex; flex-direction: column; justify-content: space-around;">
+            <img src="<%= producto.imagen %>" alt="">
+            <p class="text-center">Nombre: <%= producto.nombre %> <br> Descripcion: <%= producto.descripcion_producto %>
+                  <br>Precio: <%= producto.precio %><br> Cantidad: <%= producto.cantidad %>
+            </p>
+          </div>
+
+
         </div>
-  
+
         <!-- Modal footer -->
         <div class="modal-footer">
-  
+
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
         </div>
-  
+
       </div>
     </div>
   </div>
 
   <%})%>
+
+
+    <!-- Modal editar producto -->
+    <% listadoProductos.forEach(producto=> { %>
+      <div class="modal" id="editarProducto_<%= producto._id %>">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">
+                <%= producto.nombre %>
+              </h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div style="display: flex; flex-direction: column; justify-content: space-around;">
+                <form action="/productos/<%= producto._id %>" method="post" class="form" id="editado<%= producto._id %>">
+                  <div class="form-row">
+                    <input type="hidden" value="<%= producto._id %>" name="id">
+                    <div class="form-group col-md-12">
+                      <label for="">Nombre</label><br>
+                      <input type="text" name="nombre" id="nombre" class="form-control" value="<%= producto.nombre %>"><br>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="">Descripcion</label><br>
+                      <input type="text" name="descripcion_producto" id="descripcion_producto" class="form-control" value="<%= producto.descripcion_producto %>"><br>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="">Precio</label><br>
+                      <input type="number" name="precio" id="precio" class="form-control" value="<%= producto.precio %>"><br>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="">Cantidad</label><br>
+                      <input type="number" name="cantidad" id="cantidad" class="form-control" value="<%= producto.cantidad %>"><br>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="">Imagen</label><br>
+                      <input type="text" name="imagen" id="imagen" class="form-control" value="<%= producto.imagen %>"><br>
+                    </div><br>
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" form="editado<%= producto._id %>" >Editar</button>
+            
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <%})%>
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
 </html>

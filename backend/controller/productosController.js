@@ -3,6 +3,9 @@ const productsModels = require('../models/productosModels')
 
 exports.allProducts = async (req,res) => {
     const listadoProductos = await productsModels.find({});
+    
+
+    
     if(listadoProductos){
         res.render('pages/listaProductos',{
             listadoProductos:listadoProductos
@@ -20,6 +23,9 @@ exports.index = async (req,res) => {
 
 exports.catalogo = async (req,res) => {
     const listadoProductos = await productsModels.find({});
+
+    
+   
     if(listadoProductos){
         res.render('pages/catalogo',{
             listadoProductos:listadoProductos
@@ -59,18 +65,18 @@ exports.insertProduct =  async(req,res)=>{
 
  exports.updateProduct = async (req,res)=>{
     const updateProduct = {
-        referencia:req.body.referencia,
         nombre:req.body.nombre,
-        descripcion:req.body.descripcion,
         precio:req.body.precio,
-        stock:req.body.stock,
+        descripcion_producto:req.body.descripcion_producto,
+        cantidad:req.body.cantidad,
         imagen:req.body.imagen,
         habilitado: true
     };
-
-    let update = await productsModels.findOneAndUpdate({_id:req.params.ref},updateProduct)
+    
+    let update = await productsModels.findOneAndUpdate({_id:req.params.id},updateProduct)
+   
     if(update){
-        res.status(200).json({'mensaje':'updated successfully'}) 
+        res.redirect('/productos');
     }else{
         res.status(404).json({'error':'wrong!!'}) 
     }
@@ -88,5 +94,16 @@ exports.deleteProduct =  async (req,res) => {
         res.render('pages/listProduct',{
             mensaje:"No hay datos disponibles"
         });
+    }
+}
+
+
+exports.getProducto =  async (req,res) => {
+    const producto = await productsModels.findOne({_id:req.params.id})
+    if(producto){
+        console.log(producto)
+        res.status(200).json(producto)
+    }else{
+        res.status(404).json({"mensaje":"no se encontro el producto"})
     }
 }

@@ -7,7 +7,7 @@ const productosSchema = new conexion.Schema({
         required: [true, 'El nombre completo es obligatorio'],
         trim: true,
         maxlength: [100, 'El nombre es muy extenso'],
-        minlength: [8, 'El nombre es muy corto'],
+        minlength: [5, 'El nombre es muy corto'],
     },
     precio: {
         type: Number,

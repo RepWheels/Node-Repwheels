@@ -1,11 +1,12 @@
-function deleteOne(id){
-    
-    fetch(`/deleteProduct/${id}`, {
-      method: 'DELETE',
-    })
+function deleteOne(id) {
+
+  fetch(`/deleteProduct/${id}`, {
+    method: 'DELETE',
+  })
     .then(
       alert('Eliminado correctamente')
     )
-    location.href = '/productos'
-    
+  location.href = '/productos'
+
 }
+
