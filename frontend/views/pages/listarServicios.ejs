@@ -8,7 +8,7 @@
     <main>
         <div class="container-fluid m-3">
         <h1 class="h1">Lista de Servicios</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="servicio">
         <thead class="table-dark">
             <tr>
                 <th>Nombre del servicio</th>
@@ -25,26 +25,184 @@
                     <td><%= servicios.precio %></td>
                     <td><%= servicios.descripcion_servicio %></td>
                     <td>
-                        <a class="btn btn-info" href="#">Editar</a>
-                        <a class="btn btn-danger" href="#">Eliminar</a>   
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#show_<%= servicios._id %>"><i class="bi bi-eye"></i></button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#update_<%= servicios._id %>"><i class="bi bi-pencil-square"></i></button>
+                        <a class="btn btn-danger" onclick="deleteOne(`<%= servicios._id %>`)"><i class="bi bi-trash-fill"></i></a>   
                     </td>
                 </tr>
                 <%})%>
         </tbody>
         </table>
     
-        <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-        </nav>
+        <div style="display: flex; justify-content: center; align-content: center;">
+            <a  class="btn btn-success btn-lg" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#agg"><i class="bi bi-plus"></i></a>
+        </div>
+
         </div>
     </main>
     <%- include ("../partials/footer");%>
 </body>
+<script>
+    function deleteOne(id){
+    
+        fetch(`/deleteService/${id}`, {
+          method: 'DELETE',
+        })
+        .then(
+          alert('Eliminado correctamente')
+        )
+        location.href = '/servicios'
+        
+    }
+
+    new DataTable('#servicio');
+</script>
+
+
+<% listadoServicios.forEach(servicios => { %>
+    <div class="modal" id="update_<%= servicios._id %>">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title"><%= servicios.nombre %></h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div style="display: flex; flex-direction: column; justify-content: space-around;">
+                     <form class="form" action="/updateService/<%= servicios._id %>"  method="post">
+                        <h1 style="text-align: center;">Editar Servicio</h1>
+                        <input type="hidden" name="id" value="">
+                        <div class="form-row">
+                          <div class="form-group col-md-12">
+                            <label for="inputPassword4">Nombre del servicio</label>
+                            <input type="Text" class="form-control" id="NombreC" placeholder="NombreC" value="<%= servicios.nombre %>" name="nombre">
+                          </div>
+                          <br>
+                          <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripcion de servicio</label>
+                            <input type="text" class="form-control" id="descripcion" placeholder="descripcion" value="<%= servicios.descripcion_servicio %>" name="descripcion_servicio">
+                          </div>
+                          <br>
+                          <div class="mb-3">
+                            <label for="descripcion" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="descripcion" placeholder="precio" name="precio" value="<%= servicios.precio %>">
+                          </div>     
+                          <br>
+
+                          <div class="mb-3">
+                            <label for="Foto" class="form-label">Imagen</label>
+                            <input type="text" name="imagen" id="imagen" class="form-control" value="<%= servicios.imagen %>">
+                          </div>
+                          <button type="submit" class="btn btn-primary">Actualizar</button>
+                        </div>
+                      </form>
+              </div>
+              
+            
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%})%>
+  
+
+
+<div class="modal" id="agg">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar servicios</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="/insertService" method="post" class="form">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="">Nombre</label><br>
+                <input type="text" name="nombre" id="nombre" class="form-control"><br>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="">Descripcion</label><br>
+                <input type="text" name="descripcion_servicio" id="descripcion_servicios" class="form-control"><br>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="">Precio</label><br>
+                <input type="number" name="precio" id="precio" class="form-control"><br>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="">Imagen</label><br>
+                <input type="text" name="imagen" id="imagen" class="form-control"><br>
+              </div><br>  
+            </div>  
+            <button class="btn btn-danger">Agregar servicios</button>
+        </form>
+            
+          
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+  
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+<% listadoServicios.forEach(servicios => { %>
+  <div class="modal" id="show_<%= servicios._id %>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><%= servicios.nombre %></h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body" style="display: flex; flex-direction: column;" >
+            <div style="display:flex; justify-content: center;">
+                <img src="<%= servicios.imagen %>" alt="<%= servicios.nombre %>" width="200px" height="200px" >
+            </div>
+            
+            <div>
+                <br>
+                <p class="text-center">Nombre: <%= servicios.nombre %> <br> Descripcion: <%= servicios.descripcion_servicio %><br>Precio: <%= servicios.precio %><br> %></p>
+            </div>
+          
+            
+          
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+  
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  <%})%>
+
+
+  
+
 </html>
 

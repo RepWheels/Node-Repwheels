@@ -14,7 +14,12 @@ module.exports = function(){
 
     // Servicios
     router.get("/servicios", services.allServices)
-    router.post("/servicios", services.insertServices)
+    router.post("/insertService", services.insertServices)
     router.get("/allservicios", services.services)
+    router.delete("/deleteService/:id", services.deleteServices)
+
+    router.post("/updateService/:id", services.updateService)
+
+
     return router
 }

@@ -24,6 +24,7 @@ exports.insertServices =  async(req,res)=>{
         nombre:req.body.nombre,
         descripcion_servicio:req.body.descripcion_servicio,
         precio:req.body.precio,
+        imagen:req.body.imagen,
     };
 
     let insert = await servicesModels.create(newService)
@@ -37,7 +38,7 @@ exports.insertServices =  async(req,res)=>{
 
 
 exports.deleteServices =  async (req,res) => {
-    const remove = await servicesModels.findOneAndDelete({nombre:req.params.id});
+    const remove = await servicesModels.findOneAndDelete({_id:req.params.id});
     const listadoServicios = await servicesModels.find({});
     if(listadoServicios){
         res.redirect('/servicios');
@@ -45,5 +46,21 @@ exports.deleteServices =  async (req,res) => {
         res.render('listarServicios',{
             mensaje:"No hay datos disponibles"
         });
+    }
+}
+
+
+exports.updateService = async (req,res)=>{
+    const updateService = {
+        nombre:req.body.nombre,
+        descripcion_servicio:req.body.descripcion_servicio,
+        precio:req.body.precio,
+        imagen:req.body.imagen,
+    };
+    let update = await servicesModels.findOneAndUpdate({_id:req.params.id},updateService)
+    if(update){
+        res.redirect("/servicios")
+    }else{
+        res.status(404).json({"error":"capa8"})
     }
 }
