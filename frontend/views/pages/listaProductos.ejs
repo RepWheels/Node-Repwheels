@@ -7,38 +7,42 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Catalogo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Ver productos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Ver usuarios</a>
-            </li>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="trasnnav" >
+        <div class="container" >
+            <a class="navbar-brand" href="/inicio"><img src="../img/Logo.png" alt=""
+                    width="51px" height="50px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/catalogo" role="button"
+                            data-bs-toggle="dropdown" style="color: black;">Productos</a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/usuarios" role="button"
+                                data-bs-toggle="dropdown" style="color: black;">Usuarios</a>
+                        </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" style="color: black;">Servicios</a>
+                    </li>
+                    
+                </ul>
+                <form id='botones' class="d-flex">
+                    
+                        <a class="btn btn-outline-danger text-black rounded-4" href="#">Iniciar Sesion</a>
+                        <a class="btn btn-outline-danger text-black rounded-4" href="#">Registrarse</a>
 
-          </ul>
+                </form>
+            </div>
         </div>
-
-        <div class="nav-botones">
-          <button class="btn btn-primary" type="button">Iniciar sesion</button>
-          <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"><i class="bi bi-cart-fill"></i></button>
-        </div>
-
-      </div>
-      </div>
     </nav>
-  </header>
-  <main>
+</header>
+  <main style="margin-top: 5%;">
     <div class="container-fluid m-3" style="padding: 2%;">
       <h1 class="text-center">Productos</h1>
       <table class="table table-bordered table-hover" id="producto">
@@ -48,8 +52,6 @@
             <th>Precio</th>
             <th>Descripcion</th>
             <th>Cantidad</th>
-            <th>Imagen</th>
-
             <th>Acciones</th>
           </tr>
         </thead>
@@ -62,7 +64,6 @@
               </td>
               <td>
                 <%= producto.precio %>
-                <%= producto._id %>
               </td>
               <td>
                 <%= producto.descripcion_producto %>
@@ -70,10 +71,6 @@
               <td>
                 <%= producto.cantidad %>
               </td>
-              <td>
-                <img src="<%= producto.imagen %>" >
-              </td>
-
               <td>
                 <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#show_<%= producto._id %>"><i
                     class="bi bi-eye"></i></button>
@@ -171,7 +168,7 @@
         <!-- Modal body -->
         <div class="modal-body">
           <div style="display: flex; flex-direction: column; justify-content: space-around;">
-            <img src="<%= producto.imagen %>" alt="">
+            <img src="<%= producto.imagen %>" alt="" height="400px">
             <p class="text-center">Nombre: <%= producto.nombre %> <br> Descripcion: <%= producto.descripcion_producto %>
                   <br>Precio: <%= producto.precio %><br> Cantidad: <%= producto.cantidad %>
             </p>

@@ -6,7 +6,7 @@ function deleteOne(id) {
     .then(
       alert('Eliminado correctamente')
     )
-  location.href = '/productos'
+  location.href = '/'
 
 }
 

@@ -56,7 +56,7 @@ exports.insertProduct =  async(req,res)=>{
 
     let insert = await productsModels.create(newProduct)
     if(insert){
-        res.redirect('/productos');
+        res.redirect('/');
     }else{
         res.status(404).json({'error':'wrong!!'}) 
     }
@@ -76,7 +76,7 @@ exports.insertProduct =  async(req,res)=>{
     let update = await productsModels.findOneAndUpdate({_id:req.params.id},updateProduct)
    
     if(update){
-        res.redirect('/productos');
+        res.redirect('/');
     }else{
         res.status(404).json({'error':'wrong!!'}) 
     }

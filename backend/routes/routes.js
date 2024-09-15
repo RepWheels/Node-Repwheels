@@ -6,7 +6,7 @@ const usuarios = require('../controller/usuariosController')
 
 module.exports = function(){
 
-    router.get('/productos',products.allProducts)
+    router.get('/',products.allProducts)
     router.get('/productosOne/:id',products.getProducto)
     router.post('/insertarProducto',products.insertProduct)
     router.post('/productos/:id',products.updateProduct)
