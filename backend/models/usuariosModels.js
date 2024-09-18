@@ -30,7 +30,8 @@ const userSchema = new conexion.Schema({
     },
     imagen: {
         type: String,
-        required: [true, 'no existe la imagen o ruta a la imagen por defecto']
+        required: [false, 'no existe la imagen o ruta a la imagen por defecto'],
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIFYgpCPMtvHYo7rQ8fFSEgLa1BO78b_9hHA&s"
     },
 },{versionKey:false});
 

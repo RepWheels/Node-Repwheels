@@ -20,7 +20,9 @@ module.exports = function(){
 
     router.get('/usuarios',usuarios.allUsers)
     router.post('/insertarUsuario',usuarios.insertUser)
-
+    router.get('/login',usuarios.login)
+    router.get('/registro',usuarios.registro)
+    router.post('/registroForm',usuarios.register)
 
     
     

@@ -1,7 +1,8 @@
 const modelUser = require('../models/usuariosModels')
+const customersModels = require('../models/clientes.models')
 
 exports.oneUser =  async (req,res) => {
-    const query = await modelUser.find({correo:req.params.ref});
+    const query = await modelUser.find({correo:req.params.ref,});
     res.status(200).json(query)  
     console.log(query)  
 }
@@ -20,6 +21,16 @@ exports.allUsers = async (req,res) => {
  
 }
 
+exports.login = async (req,res) => {
+    res.render('pages/login')  
+}
+
+exports.registro = async (req,res) => {
+    res.render('pages/registro')  
+}
+
+
+
 exports.insertUser =  async(req,res)=>{
     const newUser = {
         nombre: req.body.nombre,
@@ -37,6 +48,7 @@ exports.insertUser =  async(req,res)=>{
         res.status(404).json({'error':'wrong!!'}) 
     }
 }
+
 
 exports.updateUser = async (req,res)=>{
     const updateUser = {
@@ -58,4 +70,34 @@ exports.updateUser = async (req,res)=>{
 exports.deleteUser =  async (req,res) => {
     const remove = await modelUser.findOneAndDelete({correo:req.params.id});
     res.status(200).json({"mensaje":"removed successfully"})   
+}
+
+exports.register =  async (req,res) => {
+
+    const newUser = {
+        nombre:req.body.nombre,
+        correo:req.body.correo,
+        password:req.body.password,
+        rol:req.body.rol,
+        habilitado: true
+    };
+
+    let user = await modelUser(newUser).save();
+
+    const newCustomer = {
+        
+        telefono:req.body.telefono,
+        direccion:req.body.direccion,
+        habilitado:req.body.true,
+        usuario: user._id
+    };
+
+    let customer = await customersModels(newCustomer).save();
+
+    if(customer){
+        res.render('pages/login')
+    }
+
+
+
 }

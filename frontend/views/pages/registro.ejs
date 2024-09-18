@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <main>
+        <h1 class="h1">Registro</h1>
+        <section id="principal">
+          <article id="cont2">
+            <div id="formulario">
+              <h2 class="h2">RepWheels</h2>
+              <form action="/registroForm" method="post">
+                  <div class="mb-3 mt-3">
+                    <label for="email" class="form-label">Nombre completo:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="nombre" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="pwd" class="form-label">Correo electronico:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="correo" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="pwd" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
+                  </div>
+                  <div >
+                    <button type="submit" class="btn btn-danger">Registrarse</button>
+                    <button id="cancelarR" type="submit" class="btn btn-primary"><a href="{% url 'index' %}">Cancelar</a></button>
+                  </div>
+                  
+                </form> 
+          </div>
+        </article>
+        
+        </section>
+  
+      </main>
+</body>
+</html>
