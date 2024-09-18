@@ -1,1 +1,0 @@
-donde se consulta a la base de datos y se guarda

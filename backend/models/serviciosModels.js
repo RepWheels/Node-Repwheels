@@ -17,6 +17,11 @@ const serviciosSchema = new conexion.Schema({
         type: String,
         required: [true, 'La descripción del servicio es obligatoria'],
     },
+    imagen: {
+        type: String,
+        required: [true, 'no existe la imagen o ruta a la imagen por defecto']
+    },
+
 }, { versionKey: false });
 
 const Servicios = conexion.model('servicios', serviciosSchema);
