@@ -22,19 +22,12 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="/catalogo" role="button"
-                                data-bs-toggle="dropdown" style="color: black;">Usuarios</a>
+                                data-bs-toggle="dropdown" style="color: black;">Catalogo</a>
                         </li>
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                            <a class="nav-link dropdown-toggle" href="/servicios" role="button"
                                 data-bs-toggle="dropdown" style="color: black;">Servicios</a>
-                            <ul class="dropdown-menu">
-                                
-                                <li><a class="dropdown-item" href="{% url 'registrarServicio' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listarServicio' %}">Listar</a></li>
-                               
-                                <li><a class="dropdown-item" href="{% url 'servicios' %}">Servicios</a></li>
-                            </ul>
                         </li>
                         
                     </ul>
@@ -69,24 +62,24 @@
                 <h1>Servicios</h1>
             </div>
             <article class="tarjetas">
-                    {% for i in servicios %}
+                <% listadoServicios.forEach(producto=> { %>
                         
                             <div class="card align-items-center text-center p-10" style="width: 20rem; padding: 10px;">
                                 <div class="col-md-4">
-                                    <img src="{{ i.foto.url }}" class="img-fluid rounded-start" alt="{{ i.nombre }}" style="width:86%; height: 200px;">
+                                    <img src="<%= producto.imagen %>" class="img-fluid rounded-start"  style="width:86%; height: 200px;">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ i.nombre }}</h5>
-                                        <p class="card-text">{{ i.descripcion_servicio }}</p>
-                                        <p class="card-text">$ {{ i.precio }}</p>
+                                        <h5 class="card-title"><%= producto.nombre %></h5>
+                                        <p class="card-text"><%= producto.descripcion_servicio %></p>
+                                        <p class="card-text">$ <%= producto.precio %></p>
                                     </div>  
                                 </div>
                             </div>
                             
                     
-                    {% endfor %}
-                
+                    
+                            <%})%>
             </article>
             <div class="text-center mb-4">
                 <a href="{% url 'servicios' %}" class="btn btn-danger" >Ver más servicios</a>
@@ -130,7 +123,7 @@
             </div>
             <div id="carta2">
                 <div class="card" style="width: 18rem;">
-                    <img src="{% static 'tienda/img/marcas.png' %}" class="card-img-top" alt="...">
+                    <img src="../img/marcas.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Conocimiento</h5>
                         <p class="card-text">Contamos con trabajores especializados y con un alto conocimiento en todas las
@@ -138,7 +131,7 @@
                     </div>
                 </div>
                 <div class="card" style="width: 18rem;">
-                    <img src="{% static 'tienda/img/tecnologia.jpg' %}" class="card-img-top" alt="...">
+                    <img src="../img/tecnologiajpg.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Tecnologia</h5>
                         <p class="card-text">Contamos con equipos como escanner , multimetros , banco de inyectores, entre
@@ -146,7 +139,7 @@
                     </div>
                 </div>
                 <div class="card" style="width: 18rem;">
-                    <img src="{% static 'tienda/img/valor.jpg' %}" class="card-img-top" alt="...">
+                    <img src="../img/valor.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Honestidad</h5>
                         <p class="card-text">Nuestros empleados son muy honestos al momento de realizar una cotizacion y
@@ -155,49 +148,7 @@
                 </div>
             </div>
         </section>
-        <section class="section3">
-            <div class="tit">
-                <h1>Calificaciones de nuestro servicios</h1>
-            </div>
-            <article class="tarjetas">
-                {% if data %}
-                {% for e in data %}
-                    {% if forloop.counter > 0 and forloop.counter <= 3 %}
-                        <div class="card align-items-center text-center p-10" style="width:20%; padding: 2%;">
-                            <img src="{{ e.foto.url }}" class="card-img-top" style="width:85%;">
-                            <div class="card-body">
-                            <strong>Calificaciones: </strong>
-                            <form id="form_calificaciones">
-            
-                                <p class="clasificacion">
-                                <input type="radio" name="estrellas" class="star" value="5" {% if e.cantidad_estrellas == 5 %}checked="true"{% endif%}>
-                                <label for="radio1">★</label>
-                                <input type="radio" name="estrellas" class="star" value="4" {% if e.cantidad_estrellas == 4 %}checked="true"{% endif%}>
-                                <label for="radio2">★</label>
-                                <input type="radio" name="estrellas" class="star" value="3" {% if e.cantidad_estrellas == 3 %}checked="true"{% endif%}>
-                                <label for="radio3">★</label>
-                                <input type="radio" name="estrellas" class="star" value="2" {% if e.cantidad_estrellas == 2 %}checked="true"{% endif%}>
-                                <label class="st">★</label>
-                                <input type="radio" name="estrellas" class="star" value="1" {% if e.cantidad_estrellas == 1 %}checked="true"{% endif%}>
-                                <label for="radio5">★</label>
-                                </p>
-                            </form>
-                            <p class="card-text">{{ e.nombre }} </p>
-                            <p class="text"><strong>Hecho por: </strong> {{ e.cliente }}</p>
-                            <p class="text"><strong>Servicio: </strong>{{ e.servicios }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %} 
-                {% else %}
-                        <h2>No hay calificaciones</h2>
-                {% endif %}             
-            </article><br>
-            <div class="text-center mb-4">
-                <a href="{% url 'calificaciones' %}" class="btn btn-danger" >Ver más</a>
-            </div>
-        </section>
-        {% endblock %}
+        
     <footer>
         <div id="super">
             <div>

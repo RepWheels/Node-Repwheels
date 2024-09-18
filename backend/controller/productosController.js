@@ -1,10 +1,10 @@
 
 const productsModels = require('../models/productosModels')
+const servicesModels = require("../models/serviciosModels")
 
 exports.allProducts = async (req,res) => {
     const listadoProductos = await productsModels.find({});
     
-
     
     if(listadoProductos){
         res.render('pages/listaProductos',{
@@ -18,7 +18,13 @@ exports.allProducts = async (req,res) => {
 }
 
 exports.index = async (req,res) => {
-    res.render('pages/index')
+    const listadoProductos = await productsModels.find({});
+    const listadoServicios = await servicesModels.find({});
+    res.render('pages/index',{
+        listadoProductos:listadoProductos,
+    
+            listadoServicios:listadoServicios
+    })
 }
 
 exports.catalogo = async (req,res) => {

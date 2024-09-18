@@ -16,7 +16,13 @@ const serviciosSchema = new conexion.Schema({
     descripcion_servicio: {
         type: String,
         required: [true, 'La descripción del servicio es obligatoria'],
+    }, 
+    imagen: {
+        type: String,
+        required: [false, 'no existe la imagen o ruta a la imagen por defecto'],
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTixLc5vG_VjsEsXAwgQGthytPUJa1aoPc8g&s"
     },
+    
 }, { versionKey: false });
 
 const Servicios = conexion.model('servicios', serviciosSchema);

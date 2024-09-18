@@ -22,19 +22,12 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="/catalogo" role="button"
-                                data-bs-toggle="dropdown" style="color: black;">Usuarios</a>
+                                data-bs-toggle="dropdown" style="color: black;">Catalogo</a>
                         </li>
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                            <a class="nav-link dropdown-toggle" href="/servicios" role="button"
                                 data-bs-toggle="dropdown" style="color: black;">Servicios</a>
-                            <ul class="dropdown-menu">
-                                
-                                <li><a class="dropdown-item" href="{% url 'registrarServicio' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listarServicio' %}">Listar</a></li>
-                               
-                                <li><a class="dropdown-item" href="{% url 'servicios' %}">Servicios</a></li>
-                            </ul>
                         </li>
                         
                     </ul>
@@ -83,7 +76,7 @@
                 <% listadoProductos.forEach(producto => { %>
                           
                               <div class="card align-items-center text-center p-10" style="width: 18rem; padding: 4%;">
-                                <img src="<%= producto.imagen %>" class="card-img-top" alt="{{ p.nombre }}" style="width:86%; height: 130px;" >
+                                <img src="<%= producto.imagen %>" class="card-img-top" alt="No carga la imagen" style="width:86%; height: 130px;" >
                                   <div class="card-body">
                                     <p class="card-text"><%= producto.nombre %> <br> <strong>$<%= producto.precio %></strong> <br> <%= producto.descripcion_producto %></p>
                                     <form>
