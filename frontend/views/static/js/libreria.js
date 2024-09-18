@@ -173,3 +173,14 @@ function stars() {
 
 }
 
+function deleteOne(id){
+    
+    fetch(`/deleteService/${id}`, {
+      method: 'DELETE',
+    })
+    .then(
+      alert('Eliminado correctamente')
+    )
+    location.href = '/servicios'
+    
+}

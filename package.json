@@ -4,8 +4,8 @@
   "description": "Proyecto Formativo",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon index.js",
+    "start": "pm2 start index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.15",
     "nodemon": "^3.1.4",
+    "pm2": "^5.4.2",
     "stripe": "^16.10.0"
   }
 }
