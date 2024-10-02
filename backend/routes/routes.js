@@ -11,7 +11,6 @@ module.exports = function(){
     router.post('/insertarProducto',products.insertProduct)
     router.post('/productos/:id',products.updateProduct)
     router.delete('/deleteProduct/:id',products.deleteProduct)
-
     router.get('/inicio', products.index)
     router.get('/catalogo', products.catalogo)
 
