@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('../partials/head'); %>
     <link rel="stylesheet" href="css/landing.css">
+    <%- include('../partials/head'); %>
 </head>
 <body>
     <header>
@@ -35,12 +35,31 @@
                         
                             <a class="btn btn-outline-danger text-black rounded-4" href="/login">Iniciar Sesion</a>
                             <a class="btn btn-outline-danger text-black rounded-4" href="/registro">Registrarse</a>
-
+                            <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart-fill"></i></button>
                     </form>
                 </div>
             </div>
         </nav>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
+          <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+              <h2>Carrito de Compras</h2>
+              <img src="img/carrito.jpeg" alt=""  class="card-img-top" height="100px" width="100px">
+              <div id="contenedor">
+    
+              </div>
+              <p>Total: $<span id="total">0</span></p>
+              <button class="btn btn-primary" onclick="pagar()">Comprar</button>
+              <button class="btn btn-danger" onclick="vaciar()">Vaciar carrito</button>
+              
+          </div>
+        </div>
+      
     </header>
+   
     <main>
         <section style="background-color: black;">
             <div id="carouselServicios" class="carousel slide" style="max-width: 100%;">
@@ -80,11 +99,10 @@
                                   <div class="card-body">
                                     <p class="card-text"><%= producto.nombre %> <br> <strong>$<%= producto.precio %></strong> <br> <%= producto.descripcion_producto %></p>
                                     <form>
-                                    
                                       <input type="hidden" name="id" id="id_{{ p.id }}" value="{{ p.id }}" />
-                                      <input type="number" name="cantidad" id="cantidad_{{ p.id }}" min="1" max="{{ p.cantidad }}" value="1" style="width: 50px;" /><br><br>
+                                      <input type="number" name="cantidad_<%= producto.id %>" id="cantidad_<%= producto.id %>" min="1" max="{{ p.cantidad }}" value="1" style="width: 50px;" /><br><br>
                                       <p class="card-text">Unidades disponibles: <strong><%= producto.cantidad %></strong></p>
-                                      <button type="button" class="btn btn-danger">Añadir al carrito</button>
+                                      <button type="button" onclick="add(`<%= producto.id %>`,`<%= producto.nombre %>`,`<%= producto.precio %>`)" class="btn btn-danger">Añadir al carrito</button>
                                   </form>
                                   </div>
                               </div>
@@ -97,4 +115,136 @@
         </section>
       </main>
 </body>
+<script>
+  const carrito = []
+  const total = 0
+  const c = 0
+
+  function add(id,name,price){
+
+      let json_info = JSON.stringify(carrito)
+      localStorage.setItem('carrito',json_info)
+      let combinacion = "cantidad_" + id
+      let amount =  document.getElementById(combinacion)
+      if(carrito.length == 0){
+          
+        console.log(amount)
+          carrito.push({ name: name, price:parseInt(price),amount:amount.value})
+            }else{
+          const carrito_producto = carrito.find(item => item.name === name)
+
+          if(carrito_producto){
+              carrito_producto.amount = parseInt(carrito_producto.amount) + parseInt(amount.value)
+             console.log('Modificado')
+             console.log(carrito_producto)
+          }else{
+              carrito.push({ name: name, price:parseInt(price),amount:amount.value})
+              console.log('Agregado')
+              console.log(carrito)
+ 
+          }
+
+      }
+      updateCart()
+
+  }
+
+
+function deleteOne(name){
+console.log('Aqui estoy')
+   for(let i=0;i<=carrito.length;i++){
+      if(carrito[i].name == name){
+          carrito.pop(i)
+      }
+  }
+
+  location.href = location.href
+
+  updateCart()
+  
+
+}
+
+
+function updateCart() {
+  
+  const cartItems = document.getElementById('contenedor');
+  const totalElement = document.getElementById('total');
+  const cont = document.getElementById('deleteOne');
+  cartItems.innerText = ''
+  let total = 0;
+
+  
+  carrito.forEach(item => {
+      
+      const itemTotal = item.price * item.amount;
+      total += itemTotal;
+
+      
+          const card = document.createElement('div');
+          card.className = 'cart-item';
+          
+          const title = document.createElement('h3');
+          title.textContent = item.name;
+          
+          const price = document.createElement('p');
+          price.textContent = `Precio: $${item.price}`;
+
+          const amount = document.createElement('p');
+          amount.textContent = `Cantidad: ${item.amount}`;
+
+          const buttonDelete = document.createElement('button');
+          buttonDelete.type = "button";
+          buttonDelete.className = 'btn btn-danger';
+          buttonDelete.textContent = 'x'
+          buttonDelete.onclick = `deleteOne(${item.name})`
+          
+          card.appendChild(title);
+          card.appendChild(price);
+          card.appendChild(amount);
+          card.appendChild(buttonDelete);
+          
+          
+          cartItems.appendChild(card);
+  
+
+  });
+
+  totalElement.innerText = total
+
+ 
+}
+
+ 
+
+function pagar(){
+  location.href = '/checkout'
+}
+
+function vaciar(){
+  for(let i=0;i<=carrito.length;i++){
+      carrito.pop(i)
+
+  }
+
+  location.href = location.href
+
+}
+
+function eliminarUno(name){
+  for(let i=0;i<=carrito.length;i++){
+      if(carrito[i].name == name){
+          carrito.pop(i)
+          console.log('Carrito eliminado')
+
+      }
+
+  }
+
+  location.href = location.href
+
+
+}
+  
+</script>
 </html>

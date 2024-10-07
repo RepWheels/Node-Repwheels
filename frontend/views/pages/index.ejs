@@ -32,15 +32,16 @@
                         
                     </ul>
                     <form id='botones' class="d-flex">
-                        
                             <a class="btn btn-outline-danger text-black rounded-4" href="/login">Iniciar Sesion</a>
                             <a class="btn btn-outline-danger text-black rounded-4" href="/registro">Registrarse</a>
-
                     </form>
+                
                 </div>
             </div>
         </nav>
+        
     </header>
+    
     <div id="banner">
         <h1><ins>RepWheels</ins></h1>
         <div id="opciones">
@@ -56,6 +57,17 @@
         </div>
     </div>
     </header>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="carrito">
+
+            </div>
+        </div>
+    </div>
     <main>
         <section id="section1">
             <div class="tit">
@@ -93,16 +105,16 @@
             <div id="carrusel">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide">
                     <div class="carousel-inner">
-                        {% for i in servicios %}
+                    <% listadoServicios.forEach(producto=> { %>
                       
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="carousel-item">
                           <div class="d-flex align-items-center">
-                            <img src="{{ i.foto.url }}" class="d-block mx-auto" width="80%" height="400px"
+                            <img src="<%= producto.imagen %>" class="d-block mx-auto" width="80%" height="400px"
                               alt="imagen descuentos">
     
                           </div>
                         </div>
-                    {% endfor %} 
+                    <%})%>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
                         data-bs-slide="prev">

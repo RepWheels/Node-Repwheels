@@ -101,3 +101,17 @@ exports.register =  async (req,res) => {
 
 
 }
+
+
+exports.inicioSesion =  async (req,res) => {
+    const correo = req.params.correo
+    const password = req.params.password
+    const queryUser = await modelUser.find({correo:correo, password: password});
+
+    
+    
+    if(queryUser){
+        res.redirect('inicio')
+        
+    }
+}

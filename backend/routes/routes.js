@@ -24,7 +24,7 @@ module.exports = function(){
     router.get('/login',usuarios.login)
     router.get('/registro',usuarios.registro)
     router.post('/registroForm',usuarios.register)
-
+    router.post('/logueo',usuarios.inicioSesion)
 
     // router para los servicios
     router.get("/servicios", services.allServices)
